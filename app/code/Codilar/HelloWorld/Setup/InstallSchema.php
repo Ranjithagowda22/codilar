@@ -7,6 +7,7 @@
  */
 namespace Codilar\HelloWorld\Setup;
 
+use Codilar\HelloWorld\Model\ResourceModel\Sample;
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
@@ -23,8 +24,8 @@ class InstallSchema implements InstallSchemaInterface
        /* $tableName = $installer->getTable('seller_product_page');
         if (!$installer->tableExists('$tableName')) {
             $table = $installer->getConnection()*/
-                ->newTable($installer->getTable('seller_product_page'))
-                ->addColumn('product_id', Table::TYPE_INTEGER, null, [
+                ->newTable($installer->getTable(Sample::TABLE_NAME))
+                ->addColumn(Sample::ID_FIELD, Table::TYPE_INTEGER, null, [
                     'identity' => true,
                     'nullable' => false,
                     'primary' => true,

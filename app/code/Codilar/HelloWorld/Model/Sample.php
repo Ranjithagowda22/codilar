@@ -10,6 +10,7 @@
 namespace Codilar\HelloWorld\Model;
 
 use Magento\Framework\Model\AbstractModel;
+use Codilar\HelloWorld\Model\ResourceModel\Sample as ResourceModel;
 
 class Sample extends AbstractModel
 {
@@ -18,6 +19,6 @@ class Sample extends AbstractModel
      */
     protected function _construct()
     {
-        $this->_init('Codilar\HelloWorld\Model\ResourceModel\Sample');
+        $this->_init(ResourceModel::class);
     }
 }

@@ -12,11 +12,15 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
 class Sample extends AbstractDb
 {
+
+    const TABLE_NAME = "seller_product_page";
+    const ID_FIELD = "product_id";
+
     /**
      * Define main table
      */
     protected function _construct()
     {
-        $this->_init('seller_product_page', 'product_id');
+        $this->_init(self::TABLE_NAME, self::ID_FIELD);
     }
 }
