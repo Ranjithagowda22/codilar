@@ -1,0 +1,21 @@
+input[type=text] {
+
+    height: 30px;
+  margin-bottom:10px;
+    width: 50%;
+
+}
+select
+{
+    height:30px;
+    width:50%;
+    margin-bottom:10px;
+}
+
+input[type=submit]
+{
+    width:15%;
+    background-color: #00aa00;
+    height:30px;
+    color:black;
+}

@@ -1,12 +1,16 @@
 <?xml version="1.0"?>
 <page layout="2columns-left" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <css src="Codilar_SellerForm::css/seller.css" />
+
+        <css src="Codilar_HelloWorld::css/css.css" />
+
     </head>
     <body>
-        <referenceBlock name="navigation.sections" />
+
         <referenceContainer name="content">
-            <block class="Codilar\HelloWorld\Block\HelloWorld" name="seller.adding.products" template="Codilar_HelloWorld::hello_world.phtml"/>
+            <block class="Codilar\HelloWorld\Block\HelloWorld"
+                   name="seller.adding.products"
+                   template="Codilar_HelloWorld::hello_world.phtml"/>
         </referenceContainer>
     </body>
 </page>

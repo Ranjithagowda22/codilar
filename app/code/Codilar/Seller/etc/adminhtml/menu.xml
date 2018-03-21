@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Codilar_Seller::seller"
+             title="seller"
+             module="Codilar_Seller"
+             sortOrder="20"
+             resource="Codilar_Seller::seller"/>
+        <add id="Codilar_Seller::product"
+             title="Manage Seller product"
+             module="Codilar_Seller"
+             sortOrder="10"
+             action="codilar_seller/product"
+             resource="Codilar_Seller::product"
+             parent="Codilar_Seller::seller"/>
+        <add id="Codilar_Seller::order"
+             title="Manage Seller order"
+             module="Codilar_Seller"
+             sortOrder="10"
+             action="codilar_seller/order"
+             resource="Codilar_Seller::order"
+             parent="Codilar_Seller::seller"/>
+
+        <add id="Codilar_Seller::seller_configuration"
+             title="Configuration"
+             module="Codilar_Seller"
+             sortOrder="99"
+             parent="Codilar_Seller::seller"
+             action="adminhtml/system_config/edit/section/seller"
+             resource="Codilar_Seller::seller_configuration"/>
+    </menu>
+</config>
