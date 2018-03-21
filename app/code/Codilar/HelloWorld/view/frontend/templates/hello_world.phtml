@@ -1,28 +1,19 @@
-</h3><b>Add New product</b></h3>
+<h3><b>Add New product</b></h3>
 <div class="form656">
 
-    <form action="<?php echo $this->getUrl("hello/AddProduct/Index")?>" method="post">
-   <label> Product Name</label><br/> <input name="pname" type="text"/><br/>
-   <label>SKU</label> <br/><input name="sku" type="text"/><br/>
-    <label>price</</label><br/><input name="price" type="text"/><br/>
-    <label>Tax Class </label><br/>
-    <select name="taxclass">
-        <option value="catalog">catalog</option>
-        <option value="search">search</option>
-    </select><br/>
-    <label>Stock Status </label> <br/><input name="status" type="text"/><br/>
-    <label>weight</label> <br/><input name="weight" type="text"/><br/>
-    <label>visiblity</</label><br/><input name="visiblity" type="text"/><br/>
-    <select name="category">
-        <option value="cat1">category</option>
-        <option value="cat2">category</option>
+    <form action="<?php echo $this->getUrl("hello/index/index")?>" method="post">
+        <label> Product Name</label><br/> <input name="pname" type="text"/><br/>
+        <label>price</</label><br/><input name="price" type="text"/><br/>
+        <label>description</</label><br/><input name="description" type="text" /><br/>
+        <select name="category">
+            <option value="cat1">category</option>
+            <option value="cat2">category</option>
+        </select><br/>
+        <label>image</label> <br/><input type="file" name="pic" accept="image/*"/><br/>
+        <br/>
 
-    </select><br/>
-    <label>image</label> <br/><input type="file" name="pic" accept="image/*"/><br/>
-<br/>
+        <input type="submit" name="submit" value="save product"/>
 
-<input type="submit" name="submit" value="save product"/>
-
-</form>
+    </form>
 
 </div>

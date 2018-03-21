@@ -28,7 +28,7 @@ class HelloWorld extends \Magento\Framework\View\Element\Template
         // companymodule is given in routes.xml
         // controller_name is folder name inside controller folder
         // action is php file name inside above controller_name folder
-        $action = $this->_urlBuilder->getUrl('hello/AddProduct/Index');
+        $action = $this->_urlBuilder->getUrl('hello/index/index');
         return $action;
         // here controller_name is index, action is booking
     }

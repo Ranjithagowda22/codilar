@@ -33,7 +33,6 @@ class InstallSchema implements InstallSchemaInterface
                 ->addColumn('category', Table::TYPE_TEXT, 255, ['nullable => false'], 'Post Category')
                 ->addColumn('product_name', Table::TYPE_TEXT,255,['nullable=>false'], 'Post Product_Name')
                 ->addColumn('product_price', Table::TYPE_TEXT,255,['nullable=>false'], 'Post Product_Price')
-                ->addColumn('url_key', Table::TYPE_TEXT, 255, [], 'Post URL Key')
                 ->addColumn('description', Table::TYPE_TEXT, '64k', [], 'Post  Description')
                 ->addColumn('image', Table::TYPE_TEXT, 255, [], 'Post Image')
                 ->addColumn('enabled', Table::TYPE_INTEGER, 1, [], 'Post Enabled')
