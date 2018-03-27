@@ -2,11 +2,12 @@
 
 namespace Codilar\HelloWorld\Controller\Index;
 
+use Magento\Customer\Controller\AbstractAccount;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 
-class Index extends Action
+class Index extends AbstractAccount
 {
 
     protected $resultPageFactory;

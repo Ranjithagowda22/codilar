@@ -10,7 +10,9 @@
         <referenceContainer name="content">
             <block class="Codilar\HelloWorld\Block\HelloWorld"
                    name="seller.adding.products"
-                   template="Codilar_HelloWorld::hello_world.phtml"/>
+                   template="Codilar_HelloWorld::hello_world.phtml"
+                   cacheable="false"/>
         </referenceContainer>
+
     </body>
 </page>

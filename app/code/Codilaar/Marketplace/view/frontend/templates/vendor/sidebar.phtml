@@ -1,0 +1,23 @@
+<?php
+/* @var $block \Codilaar\Marketplace\Block\Vendor\AccountDetailsSidebar */
+?>
+<?php
+$marketplaceVendorHelper = $this->helper('Codilaar\Marketplace\Helper\Vendor');
+?>
+<?php if ($marketplaceVendorHelper->isVendorInfoAllowedInSidebar()) : ?>
+    <div class="vendor_sidebar_additional">
+        <strong><?php /* @escapeNotVerified */ echo $block->getTitle(); ?></strong>
+<!--        <div class="vendor_account_links">-->
+<!--            <p><a href="--><?php ///* @escapeNotVerified */ echo $marketplaceVendorHelper->getVendorProfileUrl() ?><!--">Profile Info</a> </p>-->
+<!--        </div>-->
+ 	 <div class="vendor_account_links">
+            <p><a href="<?php /* @escapeNotVerified */ echo $marketplaceVendorHelper->getVendorAddProductUrl() ?>">Add Product</a> </p>
+        </div>
+<!-- 	<div class="vendor_account_links">-->
+<!--            <p><a href="--><?php ///* @escapeNotVerified */ echo $marketplaceVendorHelper->getVendorProfileUrl() ?><!--">My Orders</a> </p>-->
+<!--        </div>-->
+<!--	<div class="vendor_account_links">-->
+<!--            <p><a href="--><?php ///* @escapeNotVerified */ echo $marketplaceVendorHelper->getVendorProfileUrl() ?><!--">My Product List</a> </p>-->
+<!--        </div>	-->
+    </div>
+<?php endif; ?>

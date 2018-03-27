@@ -4,6 +4,7 @@ namespace Codilar\HelloWorld\Block;
 
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory as CategoryCollectionFactory;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Catalog\Model\Product\Visibility;
 
 class HelloWorld extends \Magento\Framework\View\Element\Template
 {
@@ -15,6 +16,10 @@ class HelloWorld extends \Magento\Framework\View\Element\Template
      * @var StoreManagerInterface
      */
     private $storeManager;
+    /**
+     * @var Visibility
+     */
+    private $visibility;
 
     /**
      * Construct
@@ -22,18 +27,21 @@ class HelloWorld extends \Magento\Framework\View\Element\Template
      * @param \Magento\Backend\Block\Template\Context|\Magento\Framework\View\Element\Template\Context $context
      * @param CategoryCollectionFactory $categoryCollectionFactory
      * @param StoreManagerInterface $storeManager
+     * @param Visibility $visibility
      * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         CategoryCollectionFactory $categoryCollectionFactory,
         StoreManagerInterface $storeManager,
+        Visibility $visibility,
         array $data = []
     )
     {
         parent::__construct($context, $data);
         $this->categoryCollectionFactory = $categoryCollectionFactory;
         $this->storeManager = $storeManager;
+        $this->visibility = $visibility;
     }
 
     /**
@@ -54,7 +62,8 @@ class HelloWorld extends \Magento\Framework\View\Element\Template
     /**
      * @return \Magento\Catalog\Model\ResourceModel\Category\Collection
      */
-    public function getAllCategories() {
+    public function getAllCategories()
+    {
         /* @var \Magento\Store\Model\Store $currentStore */
         $currentStore = $this->storeManager->getStore();
         return $this->categoryCollectionFactory->create()
@@ -62,4 +71,9 @@ class HelloWorld extends \Magento\Framework\View\Element\Template
             ->addAttributeToFilter('entity_id', ['neq' => $currentStore->getRootCategoryId()])
             ->addAttributeToFilter('is_active', 1);
     }
+
+    public function getVisibilities() {
+        return $this->visibility->toOptionArray();
+    }
+
 }
