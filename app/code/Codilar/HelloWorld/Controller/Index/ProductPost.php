@@ -7,8 +7,6 @@
  */
 
 namespace Codilar\HelloWorld\Controller\Index;
-use Magento\Framework\App\Filesystem\DirectoryList;
-use Magento\MediaStorage\Model\File\UploaderFactory;
 
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -21,6 +19,7 @@ use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
 use \Codilar\HelloWorld\Helper\Product;
 use Magento\Framework\Exception\StateException;
+use  Magento\Framework\App\Filesystem\DirectoryList;
 
 
 class ProductPost extends Action
@@ -33,10 +32,6 @@ class ProductPost extends Action
      * @var Product
      */
     private $product;
-    /**
-     * @var UploaderFactory
-     */
-    private $fileUploaderFactory;
 
     /**
      * ProductPost constructor.
@@ -44,27 +39,49 @@ class ProductPost extends Action
      * @param Session $session
      * @param Product $product
      */
+    protected $uploaderFactory;
+    protected $adapterFactory;
+    protected $filesystem;
+    /**
+     * @var DirectoryList
+     */
+    private $directoryList;
+
+    /**
+     * ProductPost constructor.
+     * @param \Magento\MediaStorage\Model\File\UploaderFactory $uploaderFactory
+     * @param \Magento\Framework\Image\AdapterFactory $adapterFactory
+     * @param \Magento\Framework\Filesystem $filesystem
+     * @param Context $context
+     * @param Session $session
+     * @param Product $product
+     * @param DirectoryList $directoryList
+     */
     public function __construct(
+        \Magento\MediaStorage\Model\File\UploaderFactory $uploaderFactory,
+        \Magento\Framework\Image\AdapterFactory $adapterFactory,
+        \Magento\Framework\Filesystem $filesystem,
         Context $context,
         Session $session,
         Product $product,
-        UploaderFactory $fileUploaderFactory
-
+        DirectoryList $directoryList
     )
     {
+        $this->uploaderFactory = $uploaderFactory;
+        $this->adapterFactory = $adapterFactory;
+        $this->filesystem = $filesystem;
         parent::__construct($context);
         $this->session = $session;
         $this->product = $product;
-        $this->fileUploaderFactory = $fileUploaderFactory;
+        $this->directoryList = $directoryList;
     }
 
     /**
      * Execute action based on request and return result
      *
      * Note: Request will be added as operation argument in future
-     *
-     * @return \Magento\Framework\Controller\ResultInterface|ResponseInterface
-     * @throws \Magento\Framework\Exception\NotFoundException
+     * @return ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * @throws \Exception
      */
     public function execute()
     {
@@ -74,16 +91,18 @@ class ProductPost extends Action
         $resultRedirect->setRefererOrBaseUrl();
 
         try {
-//            if (!$this->session->isLoggedIn()) {
-//                throw new LocalizedException(__("Illegal access"));
-//            } else if ($this->session->getCustomer()->getData('is_verified') != "yes") {
-//                throw new LocalizedException(__("Illegal access"));
-//            }
             /* @var \Magento\Framework\App\Request\Http $request */
+            $path = $this->directoryList->getPath('media');
+
+            $uploader = $this->uploaderFactory->create(['fileId' => 'image']);
+            $uploadedImage = $uploader->save($path);
+
+            $path = $uploadedImage['path']."/".$uploadedImage['file'];
+
             $request = $this->getRequest();
             $data = $request->getPostValue();
 
-            $this->product->createProduct(
+            $product = $this->product->createProduct(
                 $data['pname'],
                 $data['sku'],
                 $data['price'],
@@ -91,19 +110,26 @@ class ProductPost extends Action
                 $data['enabled'],
                 $data['visibility'],
                 explode(",", $data['category']),
-                $sellerId
+                $sellerId,
+                $path
             );
 
-        } catch (InputException $inputException) {
-            $this->messageManager->addWarningMessage("input error");
-        } catch (StateException $stateException) {
-            $this->messageManager->addWarningMessage("out of state");
-        } catch (CouldNotSaveException $couldNotSaveException) {
-            $this->messageManager->addWarningMessage($couldNotSaveException->getMessage());
+            /*echo "<pre>";
+            print_r($product->getData());die;*/
+
+//        } catch (InputException $inputException) {
+//            $this->messageManager->addWarningMessage($inputException->getMessage());
+//        } catch (StateException $stateException) {
+//            $this->messageManager->addWarningMessage($stateException->getMessage());
+//        } catch (CouldNotSaveException $couldNotSaveException) {
+//            echo $couldNotSaveException->getTraceAsString();die;
+//            $this->messageManager->addWarningMessage($couldNotSaveException->getMessage());
         } catch (\Exception $exception) {
-            echo $exception->getTraceAsString();die;
+           throw $exception;
             $this->messageManager->addErrorMessage($exception->getMessage());
         }
+
+
 
         return $resultRedirect;
 
