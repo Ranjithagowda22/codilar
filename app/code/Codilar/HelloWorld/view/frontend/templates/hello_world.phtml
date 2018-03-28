@@ -14,6 +14,7 @@ use Magento\Catalog\Model\Product\Visibility;
                 </select>
             </div>
         </div>
+<<<<<<< HEAD
         <label><?php echo __('Attribute Set') ?></span></label>
         <div>
             <select name="attribute">
@@ -23,6 +24,14 @@ use Magento\Catalog\Model\Product\Visibility;
         <label><?php echo __('Product Name') ?></span></label><br/> <input name="pname" type="text" required/><br/>
         <label>SKU</label><br/> <input name="sku" type="text" required/><br/>
         <label>price</</label><br/><input name="price" type="text"/><br/>
+=======
+        <select name="attribute">
+            <option value="4">default</option>
+        </select>
+        <p> Product Name</p> <input name="pname" type="text" required/><br/>
+        <label>SKU</label><br/> <input name="sku" type="text"/><br/>
+        <label>price</</label><br/><input name="price" type="text" required/><br/>
+>>>>>>> 09ff3d07dedb134dcac1d5f8f3ee03f9f3428efb
         <div class="field stock">
             <label class="label" for="stock"><span><?php echo __('stock status?') ?></span></label>
             <div class="control">
@@ -44,7 +53,12 @@ use Magento\Catalog\Model\Product\Visibility;
                 <option value="<?= $category->getId() ?>"><?= $category->getName() ?></option>
             <?php endforeach; ?>
         </select><br/>
-        <label>image</label> <br/><input type="file" name="image" accept="image/*"/><br/>
+        <div class="field image">
+            <label class="label" for="image"><span><?php /* @escapeNotVerified */ echo __('Image') ?></span></label>
+            <div class="control">
+                <input name="image" id="image" title="<?php /* @escapeNotVerified */ echo __('image') ?>"   type="file" />
+            </div>
+        </div>
         <br/>
         <input type="submit" name="submit" value="Save Product"/>
 
