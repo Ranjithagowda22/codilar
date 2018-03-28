@@ -86,7 +86,7 @@ class InstallData implements InstallDataInterface
                 'backend' => '',
                 'frontend' => '',
                 'label' => 'Vendor Id',
-                'input' => '',
+                'input' => 'text',
                 'class' => '',
                 'source' => '',
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
